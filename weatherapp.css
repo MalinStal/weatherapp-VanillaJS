@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+   
+}
+body {
+  background: url(/img/clouds.jpg); 
+   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   /* background: linear-gradient(135deg, rgb(12, 218, 122), rgb(13, 149, 234));*/
+
+}  
+:root {
+--background: rgba(135, 207, 235, 0.19);
+--background2: rgba(220, 238, 249, 0.838);
+--background3: rgba(135, 206, 250, 0.348);
+}
+
+.header{
+     
+     height: 100px;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 50px;
+     text-align: center;
+     justify-content: center;
+    margin-top: 40px;
+    margin-left: 40px;
+   
+}
+.rubrik {
+    font-size: 2rem;
+   
+    /* padding: 25px;
+    background-color: var(--background2);
+    border: 1px solid white;
+    box-shadow: rgba(255, 255, 255, 0.754) 20px 20px 92px 92px;
+    border-radius: 50%;*/
+}
+.search {
+    border: 1px white;
+    outline: 0;
+    background-color: var(--background3);
+    padding: 20px 25px;
+    width: 60%;
+    height: 30px;
+    border-radius: 50px;
+    font-size: 20px;
+    box-shadow: rgba(255, 255, 255, 0.754) 20px 20px 92px 92px;
+   
+    
+}
+
+.weatherContainer {
+     padding: 20px;
+     text-align: center;
+    border: 1px solid white;
+    background-color:var(--background3);
+
+}
+
+.city{
+   
+    font-size: 35px;
+    padding: 10px;
+    text-shadow: 2px 2px var(--background2);
+
+}
+.mainInformation :nth-child(2){
+  
+    font-size: 40px;
+    padding: 10px;
+
+}
+.mainInformation :nth-child(3){
+   
+    font-size: 24px;
+    padding: 30px;
+}
+
+.dateTime {
+   text-align: start;
+}
+.information :nth-child(1) {
+    padding: 7px;
+    font-size: 18px;
+}
+.information :nth-child(2) {
+    padding: 7px;
+    font-size: 18px;
+}
+.information :nth-child(3) {
+    padding: 7px;
+    font-size: 18px;
+}

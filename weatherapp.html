@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wetherapp</title>
+    <link rel="stylesheet" href="weatherapp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="maindiv">
+        <header class="header"> 
+
+            <h1 class=" rubrik">Dagens väder</h1> 
+            <input  id="search" class="search"type="search" placeholder="sök på en stad" >
+            <div class="defalt" style="display: none;">staden du söker finns ej, prova igen</div>
+        </header>
+   
+        <div id="weatherContainer" class="weatherContainer">
+            <p id="dateTime" class="dateTime"></p>
+        <div class="mainInformation"> 
+            <h2 class="city" id="city"></h2>
+            <p id="temp"></p>
+            <p id="description"></p>
+        </div>
+        <div class="information">
+            <p id="wind"></p>
+            <p id="humidity"></p>
+            <p id="pressure"></p>
+        </div>
+            
+         </div>
+   </div>
+
+    <script src="weatherapp.js"></script>
+</body>
+</html>

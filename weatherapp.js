@@ -1,0 +1,67 @@
+ const weatherInfo = document.getElementById("weatherContainer");
+ const searchInput = document.getElementById("search");
+
+
+ searchInput.addEventListener ("keypress", e => {
+    fetchWeather(searchInput.value);
+})
+ //ta bort texten i sökrutan när du klickar på input fältet
+searchInput.addEventListener("click", () => {
+    searchInput.value = '';
+})
+
+setTimeAndDate();
+
+
+
+
+//funktion för tid och dag
+function setTimeAndDate () {
+      //pilfunktion för att sätta tiden. OBS!!! anpassar sig inte efter tidszoner
+   let ShowDateTime = document.getElementById("dateTime")
+   setInterval(() => {
+        let currentTime = new Date().getTime();
+        let time = new Date(currentTime).toLocaleTimeString()
+      
+        //uppdelning för att skriva ut datum i rätt ordning
+        let showDate = new Date();
+        let day = showDate.getDate();
+        let month = showDate.getMonth() + 1;
+        let year = showDate.getFullYear();
+        let currentDate = `${day}-${month}-${year}`;
+    ShowDateTime.innerHTML = "Date: " + currentDate + ", Time: " +  time;
+}, 1000) }
+      
+//funktion som hämtar vädret från API
+function fetchWeather(city) {
+
+const api = fetch("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9") 
+    .then((respons) => respons.json())
+    .then((json) => displayWeather(json))
+};
+
+//funktion för vad för väder information som ska vissas
+function displayWeather (display) {
+    console.log(display)
+   
+    let showCity =document.getElementById("city");
+    showCity.innerText= display.name;
+  
+    let showTemp = document.getElementById("temp");
+    showTemp.innerText= Math.round(display.main.temp) + " °C";
+
+    let showDescription = document.getElementById("description");
+    showDescription.innerText=display.weather[0].description;
+
+    let showWind = document.getElementById("wind");
+    showWind.innerText= "Vindhastighet: " + display.wind.speed + " m/s ";
+   
+    let showHumidity = document.getElementById("humidity");
+    showHumidity.innerText= "Luftfuktighet: " + display.main.humidity + "%";  
+   
+    let showPressure = document.getElementById("pressure");
+    showPressure.innerText= "Lufttryck: " + display.main.pressure + " hPa ";
+   
+   
+}
+
