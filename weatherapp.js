@@ -9,11 +9,13 @@
 searchInput.addEventListener("click", () => {
     searchInput.value = '';
 })
-
+fetchWeather(searchInput.value)
 setTimeAndDate();
 
 
+    
 
+  
 
 //funktion för tid och dag
 function setTimeAndDate () {
@@ -32,26 +34,34 @@ function setTimeAndDate () {
     ShowDateTime.innerHTML = "Date: " + currentDate + ", Time: " +  time;
 }, 1000) }
       
+  setInterval(() => {
+        fetchWeather(searchInput.value)
+    }, 30 * 60 * 1000);
+
 //funktion som hämtar vädret från API
 function fetchWeather(city) {
-
-const api = fetch("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9") 
+  
+  const api = fetch("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9") 
     .then((respons) => respons.json())
     .then((json) => displayWeather(json))
+
 };
 
 //funktion för vad för väder information som ska vissas
 function displayWeather (display) {
-    console.log(display)
+    
    
     let showCity =document.getElementById("city");
     showCity.innerText= display.name;
   
     let showTemp = document.getElementById("temp");
-    showTemp.innerText= Math.round(display.main.temp) + " °C";
+        showTemp.innerText= Math.round(display.main.temp) + " °C";
 
     let showDescription = document.getElementById("description");
     showDescription.innerText=display.weather[0].description;
+
+    //let showIcon = document.getElementById("description");
+    //showIcon.innerText=display.weather[0].icon;
 
     let showWind = document.getElementById("wind");
     showWind.innerText= "Vindhastighet: " + display.wind.speed + " m/s ";
