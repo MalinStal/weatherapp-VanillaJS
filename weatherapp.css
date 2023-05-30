@@ -4,9 +4,9 @@
    
 }
 body {
-  background: url(/img/clouds.jpg); 
+  background: url(clouds.jpg); 
    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-   /* background: linear-gradient(135deg, rgb(12, 218, 122), rgb(13, 149, 234));*/
+   
 
 }  
 :root {
@@ -30,11 +30,6 @@ body {
 .rubrik {
     font-size: 2rem;
    
-    /* padding: 25px;
-    background-color: var(--background2);
-    border: 1px solid white;
-    box-shadow: rgba(255, 255, 255, 0.754) 20px 20px 92px 92px;
-    border-radius: 50%;*/
 }
 .search {
     border: 1px white;
@@ -49,9 +44,23 @@ body {
    
     
 }
+.searchBtn {
+    border: 1px white;
+    outline: 0;
+    background-color: var(--background3);
+   
+    width: 60px;
+    height: 40px;
+    border-radius: 50px;
+    font-size: 15px;
+}
+.searchBtn:hover{
+    scale: 1.3;
+}
 
 .weatherContainer {
      padding: 20px;
+
      text-align: center;
     border: 1px solid white;
     background-color:var(--background3);
@@ -91,4 +100,29 @@ body {
 .information :nth-child(3) {
     padding: 7px;
     font-size: 18px;
+}
+@media screen and (max-width: 930px) {
+    .header{
+     
+        height: auto;
+        display: flex;
+        
+        flex-wrap: wrap;
+        gap: 10px;
+    
+       margin-top: 10px;
+       margin-left: 10px;
+      
+   }
+   .search{
+    min-width: 250px;
+   }
+   .weatherContainer {
+    
+    margin-top: 20px;
+
+}
+.dateTime {
+    text-align: center;
+ }
 }
