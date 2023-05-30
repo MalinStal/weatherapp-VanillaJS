@@ -1,21 +1,22 @@
  const weatherInfo = document.getElementById("weatherContainer");
  const searchInput = document.getElementById("search");
-
-
- searchInput.addEventListener ("keypress", e => {
+ const searchBtn = document.getElementById("searchBtn");
+ let showCity =document.getElementById("city");
+    
+ 
+placeholder()
+setTimeAndDate();
+searchBtn.addEventListener ("click", e => {
     fetchWeather(searchInput.value);
+    
 })
  //ta bort texten i sökrutan när du klickar på input fältet
 searchInput.addEventListener("click", () => {
     searchInput.value = '';
 })
-fetchWeather(searchInput.value)
-setTimeAndDate();
 
 
-    
 
-  
 
 //funktion för tid och dag
 function setTimeAndDate () {
@@ -45,13 +46,17 @@ function fetchWeather(city) {
     .then((respons) => respons.json())
     .then((json) => displayWeather(json))
 
+    if (city === undefined) {
+        showCity.innerHTML = ""
+    }
+
+
 };
 
 //funktion för vad för väder information som ska vissas
 function displayWeather (display) {
     
-   
-    let showCity =document.getElementById("city");
+
     showCity.innerText= display.name;
   
     let showTemp = document.getElementById("temp");
@@ -73,5 +78,11 @@ function displayWeather (display) {
     showPressure.innerText= "Lufttryck: " + display.main.pressure + " hPa ";
    
    
+}
+//skriver ut vädret i göteborg tills någon har sökt 
+function placeholder() {
+    const api = fetch("https://api.openweathermap.org/data/2.5/weather?q=göteborg&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9") 
+    .then((respons) => respons.json())
+    .then((json) => displayWeather(json))
 }
 
