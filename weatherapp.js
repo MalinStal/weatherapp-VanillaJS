@@ -3,7 +3,8 @@ const searchInput = document.getElementById("search");
 const searchBtn = document.getElementById("searchBtn");
 const mainInfo = document.getElementsByClassName("mainInformation")
 const showCity = document.getElementById("city");
-let api1 = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9"
+
+let api = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9"
 
 placeholder()
 setTimeAndDate();
@@ -43,13 +44,16 @@ function setTimeAndDate() {
     }, 1000)
 }
 
-
-//funktion som hämtar vädret från API
+//skriver ut vädret i göteborg tills ny sökning görs
+function placeholder() {
+   fetch("https://api.openweathermap.org/data/2.5/weather?q=göteborg&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9")
+        .then((respons) => respons.json())
+        .then((json) => displayWeather(json))
+}
+//funktion som hämtar vädret beroende på vilken stad man söker på 
 function fetchWeather(city) {
 
-    const api = fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9")
-        // .then((respons) => respons.json())
-
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9")
         .then(response => {
             if (response.status !== 200) {
                 document.querySelector(".errorMessage").style.display = "block";
@@ -67,9 +71,8 @@ function fetchWeather(city) {
 
 };
 
-//funktion för vad för väder information som ska vissas
+//funktion - vilken väder information som ska vissas
 function displayWeather(display) {
-
 
     showCity.innerText = display.name;
 
@@ -78,6 +81,9 @@ function displayWeather(display) {
 
     let showDescription = document.getElementById("description");
     showDescription.innerText = display.weather[0].description;
+
+    const icon = document.getElementById("icon");
+    icon.src = "https://openweathermap.org/img/wn/" + display.weather[0].icon + "@2x.png";
 
     let showWind = document.getElementById("wind");
     showWind.innerText = "Vindhastighet: " + display.wind.speed + " m/s ";
@@ -88,40 +94,7 @@ function displayWeather(display) {
     let showPressure = document.getElementById("pressure");
     showPressure.innerText = "Lufttryck: " + display.main.pressure + " hPa ";
 
-
-    if (display.weather[0].main == "Clear") {
-        document.querySelector(".fa-sun").style.display = "block";
-
-    } else if (display.weather[0].description == "few clouds: 11-25% ") {
-        document.querySelector(".fa-cloud-sun").style.display = "block";
-
-    } else if (display.weather[0].main == "Clouds") {
-        document.querySelector(".fa-cloud").style.display = "block";
-
-    } else if (display.weather[0].description == "light rain") {
-        document.querySelector(".fa-cloud-sun-rain").style.display = "block";
-
-    } else if (display.weather[0].main == "Rain") {
-        document.querySelector(".fa-cloud-rain").style.display = "block";
-
-    } else if (display.weather[0].main == "Drizzly") {
-        document.querySelector(".fa-cloud-showers-heavy").style.display = "block";
-
-    } else if (display.weather[0].main == "Mist", "Haze", "Fog") {
-        document.querySelector(".fa-smog").style.display = "block";
-
-    } else if (display.weather[0].main == "Snow") {
-        document.querySelector(".fa-snow").style.display = "block";
-
-    } else if (display.weather[0].main == "Thunderstorm") {
-        document.querySelector(".fa-bolt-lightning").style.display = "block";
-    }
-
 }
-//skriver ut vädret i göteborg tills någon har sökt 
-function placeholder() {
-    const api = fetch("https://api.openweathermap.org/data/2.5/weather?q=göteborg&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9")
-        .then((respons) => respons.json())
-        .then((json) => displayWeather(json))
-}
+
+
 

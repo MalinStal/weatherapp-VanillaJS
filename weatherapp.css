@@ -5,8 +5,8 @@
 }
 
 body {
-    background-color: blue;
-    /*background: url(clouds.jpg); */
+   
+    background: url(clouds.jpg); 
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
