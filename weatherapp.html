@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,34 +10,53 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
+
 <body>
     <div class="maindiv">
-        <header class="header"> 
+        <header class="header">
 
-            <h1 class=" rubrik">Dagens väder</h1> 
-            <input  id="search" class="search"type="search" placeholder="sök på en stad" >
+            <h1 class=" rubrik1">Dagens väder</h1>
+            <input id="search" class="searchBox" type="search" placeholder="sök på en stad">
             <button id="searchBtn" class="searchBtn">search</button>
             <div class="defalt" style="display: none;">staden du söker finns ej, prova igen</div>
+            <div class="errorMessage">
+                <h3>Staden du söker finns inte, prova igen!</h3>
+            </div>
         </header>
         <main>
-          <div id="weatherContainer" class="weatherContainer">
-            <p id="dateTime" class="dateTime"></p>
-            <div class="mainInformation"> 
-                <h2 class="city" id="city"></h2>
-                <p id="temp"></p>
-                <p id="description"></p>
-                <p id="icon"></p>
+
+            <div id="weatherContainer" class="weatherContainer">
+                <p id="dateTime" class="dateTime"></p>
+                <div class="mainInformation">
+
+                    <h2 id="city"></h2>
+                    <p id="temp"></p>
+                    <p id="description"></p>
+                    <p id="icon" class="icon">
+                        <i class="fa-solid fa-sun fa-2xl" style="color: #ffff00; display: none;"></i>
+                        <i class="fa-solid fa-cloud-sun fa-2xl" style="color: #ffff80; display: none;"></i>
+                        <i class="fa-solid fa-cloud fa-2xl" style="color: #ffffff; display: none;"></i>
+                        <i class="fa-solid fa-cloud-rain fa-2xl" style="color: #c0c0c0; display: none;"></i>
+                        <i class="fa-solid fa-cloud-sun-rain fa-2xl" style="color: #c0c0c0; display: none;"></i>
+                        <i class="fa-solid fa-cloud-showers-heavy fa-2xl" style="color: #808080; display: none;"></i>
+                        <i class="fa-solid fa-smog fa-2xl" style="color: #c0c0c0; display: none;"></i>
+                        <i class="fa-solid fa-snowflake fa-2xl" style="color: #ffffff; display: none;"></i>
+                        <i class="fa-solid fa-bolt-lightning fa-2xl" style="color: #ffff00; display: none;"></i>
+                    </p>
+                    <p id="icon"></p>
+
+                </div>
+                <div class="weatherDetails">
+                    <p id="wind"></p>
+                    <p id="humidity"></p>
+                    <p id="pressure"></p>
+                </div>
+
             </div>
-            <div class="information">
-                <p id="wind"></p>
-                <p id="humidity"></p>
-                <p id="pressure"></p>
-            </div>
-            
-          </div>
         </main>
-   </div>
+    </div>
 
     <script src="weatherapp.js"></script>
 </body>
+
 </html>
