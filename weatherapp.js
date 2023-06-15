@@ -4,47 +4,26 @@ const searchBtn = document.getElementById("searchBtn");
 const mainInfo = document.getElementsByClassName("mainInformation")
 const showCity = document.getElementById("city");
 
-let api = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9"
 let timeInterval = null;
 
 fetchPlaceholder();
 
-// event Listener
-searchBtn.addEventListener("click", e => {
-
+setInterval(() => {
     fetchWeather(searchInput.value)
+}, 30 * 60 * 1000);
 
+//////////// event Listener //////////////////
+
+searchBtn.addEventListener("click", e => {
+    fetchWeather(searchInput.value)
 })
+
 //ta bort texten i sökrutan när du klickar på input fältet
 searchInput.addEventListener("click", () => {
     searchInput.value = '';
 })
 
-setInterval(() => {
-    fetchWeather(searchInput.value)
-}, 30 * 60 * 1000);
 ///////////////funktioner///////////////
-
-//funktion för tid och dag
-function setTimeAndDate(timezone) {
-    //pilfunktion för att sätta tiden. OBS!!! anpassar sig inte efter tidszoner
-    let ShowDateTime = document.getElementById("dateTime")
-    if (timeInterval !== null) {
-        clearInterval(timeInterval);
-    }
-
-    timeInterval = setInterval(() => {
-        // let minut = nu.getMinutes().toString();
-        //uppdelning för att skriva ut datum i rätt ordning
-        let showDate = calculateTime(120, timezone, new Date());
-        let day = showDate.getDate().toString().padStart(2, "0");
-        let month = showDate.getMonth() + 1
-        let month2 = month.toString().padStart(2, "0");
-        let year = showDate.getFullYear();
-        let currentDate = `${day}-${month2}-${year}`;
-        ShowDateTime.innerHTML = "Datum: " + currentDate + ", Tid: " + showDate.toLocaleTimeString();
-    }, 1000)
-}
 
 //skriver ut vädret i göteborg tills ny sökning görs
 function fetchPlaceholder() {
@@ -52,7 +31,8 @@ function fetchPlaceholder() {
         .then((respons) => respons.json())
         .then((json) => displayWeather(json))
 }
-//funktion som hämtar vädret beroende på vilken stad man söker på 
+
+//funktion som hämtar vädret beroende på vilken stad man söker på. ingen limit vart i värden man vill kolla vädret 
 function fetchWeather(city) {
 
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&lang=se&appid=3ee1fe60512466d911afa2c70e2190c9")
@@ -75,9 +55,8 @@ function fetchWeather(city) {
 
 //funktion - vilken väder information som ska vissas
 function displayWeather(display) {
-    setTimeAndDate(display.timezone / 60);
-
-    console.log(display)
+    //settTimeAndDate skapar tid och datum som anpassade till vilket tidzon staden man söker är i 
+    setTimeAndDate(display.timezone / 60); // tidzonen skriver ut sitt värde i sekunder och vi behöver ha värde i minuter därför delar vi tidzonen på 60. 
 
     showCity.innerText = display.name;
 
@@ -99,6 +78,26 @@ function displayWeather(display) {
     let showPressure = document.getElementById("pressure");
     showPressure.innerText = "Lufttryck: " + display.main.pressure + " hPa ";
 
+}
+// uppdaterar sidan var 30 minut 
+
+//funktion för tid och datum
+function setTimeAndDate(timezone) {
+    let ShowDateTime = document.getElementById("dateTime")
+    if (timeInterval !== null) {
+        clearInterval(timeInterval);
+    }
+
+    timeInterval = setInterval(() => {
+
+        let showDate = calculateTime(120, timezone, new Date());
+        let day = showDate.getDate().toString().padStart(2, "0");
+        let month = showDate.getMonth() + 1
+        let month2 = month.toString().padStart(2, "0");
+        let year = showDate.getFullYear();
+        let currentDate = `${day}-${month2}-${year}`;
+        ShowDateTime.innerHTML = "Datum: " + currentDate + ", Tid: " + showDate.toLocaleTimeString();
+    }, 1000)
 }
 
 function calculateTime(myOffset, timeZoneOffset, date) {
